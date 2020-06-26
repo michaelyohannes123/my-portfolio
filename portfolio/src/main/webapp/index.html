@@ -1,18 +1,93 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Michael's Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+    <div class="intro">
+      <img id="plane_id" src="/images/plane.png" onclick="no()" alt="plane" width="5%" height="3%">
+      <h1>Hello! You've stumbled onto my page!</h1>
+      <p id="secret_no"></p>
+      <h2>My name's Michael Yohannes</h2>
+      <img src="/images/me.jpg" alt="image of me" width="8%" height="10%" style="left:0px;">
+    </div>
+    <div>
+      <!-- top links for other pages in the site -->
+      <div class="top_tabs space_out">
+        <button class="tab_button" onclick="location.href = '/projects.html'">Projects</button>
+        <button class="tab_button" onclick="location.href = '/coolarticles.html'">Interesting Articles</button>
+      </div>
+      <!-- text-based section talking about myself -->
+      <div class="about_me">
+        <h4>Who am I?</h4>
+      </div>
+      <div class="about_me">
+        <p>
+          Hi! I'm going to be sophmore at the University of Chicago, 
+          intending to major in CS and perhaps minor in data science. 
+          I hail from Springfield, Viriginia, and am an Eritrean-American. 
+          I developed an interest in the field starting from high school, where I attended 
+          <a style="color:black;" href="https://tjhsst.fcps.edu/">TJ</a>. 
+          The school's STEM oriented focus led me to get be exposed to fields 
+          like app development and AI. The classroom knowledge I attained   
+          led me to pursue internships and embark on personal projects.
+        </p>
+      </div>
+      <div class="about_me">
+        <h4>Interests</h4>
+      </div>
+      <div class="about_me">
+        <p>
+          Coding is my main go-to hobby. I like reading about American political history. 
+          I'm a self proclaimed 20th century military history buff. 
+          In terms of non academic-y stuff, I like watching soccer matches and 
+          playing games (card, board, and computer). 
+        </p>
+        <br>
+      </div>
+      <!-- presidents quiz -->
+      <div class="about_me">
+        <button id="game_button" class="tab_button" onclick="getRandomPresident()" height="5%">Bored?</button>
+      </div>
+      <div class="about_me">
+        <p id="question" style="display:none;"></p>
+        <p id="result" style="margin-left:2%"></p>
+        <p style="margin-left:2%"></p>
+        <p id="right" style="display:none;">0</p>
+        <p id="slash" style="display:none;">/</p>
+        <p id="total" style="display:none;">0</p>
+        <br>
+      </div>
+      <div class="about_me space_out">
+        <button id="one" class="tab_button" onclick="isRightUpdate(this.id)" style="display:none;"></button>
+        <button id="two" class="tab_button" onclick="isRightUpdate(this.id)" style="display:none;"></button>
+      </div>
+      <div class="about_me">
+        <br>
+      </div>
+      <div class="about_me space_out">
+        <button id="three" class="tab_button" onclick="isRightUpdate(this.id)" style="display:none;"></button>
+        <button id="four" class="tab_button" onclick="isRightUpdate(this.id)" style="display:none;"></button>
+      </div>
+      <div class="about_me">
+        <br>
+      </div>
+    </div>
+    <!-- bottom contact listings -->
+    <div class="top_tabs space_out">
+      <a href="https://www.linkedin.com/in/michael-yohannes-566a49167">
+        <i class="fa fa-linkedin-square" style="color:white;"></i>
+      </a>
+      <a href="mailto:miketj2019@gmail.com">
+        <i class="fa fa-envelope" style="color:white;"></i>
+      </a>
+      <a href="https://github.com/michaelyohannes123">
+        <i class="fa fa-github" style="color:white;"></i>
+      </a>
     </div>
   </body>
 </html>
