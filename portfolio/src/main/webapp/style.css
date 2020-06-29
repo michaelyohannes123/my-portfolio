@@ -1,9 +1,46 @@
-#content {
+body{
+  background-color: #f0c284;
+  font-family: Courier;
+}
+#plane_id{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.intro {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  text-align: center;
+  width: 75%;
 }
-
-#greeting-container {
-  margin-top: 20px;
+.top_tabs{
+  flex: 1;
+  background: #b5651d;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  display: flex;
+}
+.top_tabs.space_out{
+  justify-content: space-around;
+}
+.tab_button{
+  background: #faebd7;
+  border-radius: 10px;
+}
+button:hover{
+  background-color: #d3d3d3;
+}
+.about_me{
+  display: flex;
+  background: antiquewhite;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 65%;
+}
+.about_me.space_out{
+  justify-content: space-around;
 }
