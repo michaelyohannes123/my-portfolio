@@ -78,7 +78,6 @@ function updateQuestion(president_answer_pos){
   question.style.display = 'block';
   question.innerText = 'Who was the ' + name + ' president of the United States?';
 }
-//----------FIX ----------
 /*Changes the button option texts and values so that the next question can be displayed*/
 function updateOptions(choices){
   let ids = ['one', 'two', 'three', 'four'];
