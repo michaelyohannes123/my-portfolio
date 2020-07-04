@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/*president is randomly picked from array, enabling the questions and answers to be formed */ 
+/*president is randomly picked from array, enabling the questions and answers to be formed*/ 
 function getRandomPresident() {
   document.getElementById('game_button').style.display = 'none';
   let presidents = ['George Washington', 'John Adams', 'Thomas Jefferson', 
@@ -73,22 +73,13 @@ function updateQuestion(president_answer_pos){
 }
 /*Changes the button option texts and values so that the next question can be displayed*/
 function updateOptions(choices){
-  let one = document.getElementById('one');
-  one.value = choices[0];
-  one.innerText = choices[0];
-  one.style.display = 'block';
-  let two = document.getElementById('two');
-  two.value = choices[1];
-  two.innerText = choices[1];
-  two.style.display = 'block';
-  let three = document.getElementById('three');
-  three.value = choices[2];
-  three.innerText = choices[2];
-  three.style.display = 'block';
-  let four = document.getElementById('four');
-  four.value = choices[3];
-  four.innerText = choices[3];
-  four.style.display = 'block';
+  let ids = ['one', 'two', 'three', 'four'];
+  for(let i = 0; i < ids.length; i++){
+    let option = document.getElementById(ids[i]);
+    option.value = choices[i];
+    option.innerText = choices[i];
+    option.style.display = 'block';
+  }
 }
 /*checks if the president name they clicked matches the answer set up in getRandomPresident(), updating the screen*/
 function isRightUpdate(button_id){

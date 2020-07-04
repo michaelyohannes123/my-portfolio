@@ -29,20 +29,35 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
 
 /** Servlet that handles commenting functionality */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
-  /*recieves user comment input and Datastores it*/
+@WebServlet("/data-list")
+public class ListDataServlet extends HttpServlet {
+  private ArrayList<Comment> comment_history = new ArrayList<Comment>();
+  private int comments_count;
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment_text = request.getParameter("comment_text");
-    if(comment_text.isEmpty() == false){
-      long time = System.currentTimeMillis();
-      Entity entry = new Entity("Comment");
-      entry.setProperty("text", comment_text);
-      entry.setProperty("time", time);
-      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      datastore.put(entry);
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String co = request.getParameter("comments_count");
+    if(co == null){
+      comments_count = 20;
+    }else{
+      comments_count = Integer.valueOf(co);
     }
-    response.sendRedirect("/comments.html");
+    comment_history.clear();
+    Query query = new Query("Comment").addSort("time", SortDirection.DESCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+    int count = 0;
+    for(Entity entity : results.asIterable()){
+      if(count < comments_count){
+        long id = (long) entity.getKey().getId();
+        String text = (String) entity.getProperty("text");
+        long time = (long) entity.getProperty("time");
+        Comment c = new Comment(id, text, time);
+        comment_history.add(c);
+      }
+      count++;
+    }
+    String json = new Gson().toJson(comment_history);
+    response.setContentType("application/json");
+    response.getWriter().println(json);
   }
 }

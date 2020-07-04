@@ -14,35 +14,32 @@
 package com.google.sps.servlets;
 import java.util.List;
 import java.util.ArrayList;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.PreparedQuery;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.gson.Gson;
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.sps.data.Comment;
 
-/** Servlet that handles commenting functionality */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
-  /*recieves user comment input and Datastores it*/
+/** Servlet that handles deleting comments */
+@WebServlet("/delete-data")
+public class DeleteDataServlet extends HttpServlet {
+  private ArrayList<Key> keys = new ArrayList<Key>();
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment_text = request.getParameter("comment_text");
-    if(comment_text.isEmpty() == false){
-      long time = System.currentTimeMillis();
-      Entity entry = new Entity("Comment");
-      entry.setProperty("text", comment_text);
-      entry.setProperty("time", time);
-      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      datastore.put(entry);
+    Query query = new Query("Comment");
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+    for(Entity entity : results.asIterable()){
+      keys.add(entity.getKey()); 
     }
+    datastore.delete(keys);
     response.sendRedirect("/comments.html");
   }
-}
+} 
