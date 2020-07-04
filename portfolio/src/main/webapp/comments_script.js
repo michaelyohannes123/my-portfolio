@@ -1,3 +1,4 @@
+//edited here
 /*gets comments from servlet doGet and displays it*/
 function getComments(){
   let comments_count = document.getElementById('comments_count').value;
