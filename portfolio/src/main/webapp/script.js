@@ -11,14 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/*gets quote from servlet and displays it*/
-function getRandomQuote() {
-  fetch('/data').then(response => response.text()).then((quote) => {
-    //let quotes_list = JSON.parse(quote); //could use random int pos to pick a specific quote
-    document.getElementById('quote-container').innerText = quote;
-  });
-}
-/*president is randomly picked from array, enabling the questions and answers to be formed */ 
+/*president is randomly picked from array, enabling the questions and answers to be formed*/ 
 function getRandomPresident() {
   document.getElementById('game_button').style.display = 'none';
   let presidents = ['George Washington', 'John Adams', 'Thomas Jefferson', 
