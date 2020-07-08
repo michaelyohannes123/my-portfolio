@@ -44,3 +44,9 @@ button:hover{
 .about_me.space_out{
   justify-content: space-around;
 }
+#map {
+  margin-left: auto;
+  margin-right: auto;
+  height: 600px;
+  width: 800px;
+}
