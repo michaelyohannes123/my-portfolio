@@ -26,7 +26,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+//edited here
 /** Servlet that handles deleting comments */
 @WebServlet("/delete-data")
 public class DeleteDataServlet extends HttpServlet {
