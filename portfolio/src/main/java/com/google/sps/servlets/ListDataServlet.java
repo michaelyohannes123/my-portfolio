@@ -27,8 +27,7 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
-//edited here
-/** Servlet that handles commenting functionality */
+/* Servlet that handles commenting functionality */
 @WebServlet("/data-list")
 public class ListDataServlet extends HttpServlet {
   private ArrayList<Comment> comment_history = new ArrayList<Comment>();
@@ -36,6 +35,7 @@ public class ListDataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String co = request.getParameter("comments_count");
+    //get 20 comments by default 
     if(co == null){
       comments_count = 20;
     }else{

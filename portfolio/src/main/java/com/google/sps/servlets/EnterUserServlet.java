@@ -11,37 +11,36 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 package com.google.sps.servlets;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*; 
+import com.google.gson.Gson;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.gson.Gson;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.sps.data.Comment;
-/* Servlet that handles commenting functionality */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
-  /*recieves user comment input and Datastores it*/
+import com.google.sps.data.User;
+/* handles registering a user account */
+@WebServlet("/enter-user")
+public class EnterUserServlet extends HttpServlet {
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment_text = request.getParameter("comment_text");
-    if(comment_text.isEmpty() == false){
-      long time = System.currentTimeMillis();
-      Entity entry = new Entity("Comment");
-      entry.setProperty("text", comment_text);
-      entry.setProperty("time", time);
-      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      datastore.put(entry);
-    }
-    response.sendRedirect("/comments.html");
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String userEmail = request.getParameter("userEmail");
+    String answer = request.getParameter("answer");
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Entity entry = new Entity("User");
+    entry.setProperty("userEmail", userEmail);
+    entry.setProperty("answer", answer);
+    datastore.put(entry);
+    response.sendRedirect("/index.html");
   }
 }

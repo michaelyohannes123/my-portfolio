@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package com.google.sps.servlets;
+import java.util.*; 
 import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -27,21 +28,33 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
-/* Servlet that handles commenting functionality */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
-  /*recieves user comment input and Datastores it*/
+/* handles getting total opinions on the question for the chart */
+@WebServlet("/get-userdata")
+public class UserDataServlet extends HttpServlet {
+  private ArrayList<String> comment_history = new ArrayList<String>();
+  private long deo_count = 0;
+  private long util_count = 0;
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment_text = request.getParameter("comment_text");
-    if(comment_text.isEmpty() == false){
-      long time = System.currentTimeMillis();
-      Entity entry = new Entity("Comment");
-      entry.setProperty("text", comment_text);
-      entry.setProperty("time", time);
-      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      datastore.put(entry);
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("User");
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+    for(Entity entity : results.asIterable()){
+      String answer = (String) entity.getProperty("answer");
+      if(answer.equals("Utilitarian")){
+        util_count++;
+      }
+      else if(answer.equals("Deontological")){
+        deo_count++;
+      }
     }
-    response.sendRedirect("/comments.html");
+    Dictionary dict = new Hashtable();
+    dict.put("Deontological_count", deo_count);
+    dict.put("Utilitarian_count", util_count);
+    deo_count = 0;
+    util_count = 0;
+    String json = new Gson().toJson(dict);
+    response.setContentType("application/json");
+    response.getWriter().println(json);
   }
 }

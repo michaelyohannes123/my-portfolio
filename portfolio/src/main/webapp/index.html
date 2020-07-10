@@ -21,6 +21,43 @@
         <button class="tab_button" onclick="location.href = '/projects.html'">Projects</button>
         <button class="tab_button" onclick="location.href = '/coolarticles.html'">Interesting Articles</button>
         <button class="tab_button" onclick="location.href = '/comments.html'">Comments Section</button>
+        <button class="tab_button" onclick="location.href = '/countries.html'">Countries Game</button>
+      </div>
+      <div class="about_me">
+        <br>
+        <p id="greet-user" style="display:none;"></p>
+        <br>
+      </div>
+      <div class="about_me">
+        <a id="login_link" href="#" onclick="checkLogin()" style="color:black; display:none;">Login!</a>
+        <br>
+      </div>
+      <!--for asking user a question if they're a first time user-->
+      <div id="question" class="modal" style="display:none;">
+        <div class="about_me">
+          <div>
+            <p id="thanks" style="display:none;">Thanks for the response. Check the comment sections to see a chart of the responses.</p>
+            <p id="qp1">Hey new user! I want to ask you the following question: </p>
+            <p id="qp2">A runaway trolley is heading down the tracks toward five workers who will all be killed 
+            if the trolley proceeds on its present course. You are standing next to a large switch that 
+            can divert the trolley onto a different track. The only way to save the lives of the five 
+            workers is to divert the trolley onto another track that only has one worker on it. If you 
+            diverts the trolley onto the other track, this one worker will die, but the other five 
+            workers will be saved.</p>
+            <p id="qp3">What would you do?</p>
+            <div id="choices" class="about_me space_out">
+              <input type='radio' id="d" name='answer'>
+              <label for="d">Don't intervene; if you divert you're actively responsible for the death of 
+              someone, which is inherently wrong regardless if you try to save the others.</label><br>
+              <input type='radio' id="u" name='answer'>
+              <label for="u">Divert the train; you'll be saving five people at the cost of 1 person, resulting
+              in a net 4 people saved.</label><br>
+            </div>
+            <button id="answer_button" class="tab_button" onclick="updateUserData()">Answer</button>
+            <button id="close" class="tab_button" onclick="closeModal()" style="display:none;">Cool no problem</button>
+            <p></p>
+         </div>
+        </div>
       </div>
       <!-- text-based section talking about myself -->
       <div class="about_me">
