@@ -27,7 +27,8 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
-/* Servlet that handles commenting functionality */
+//edited here
+/** Servlet that handles commenting functionality */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   /*recieves user comment input and Datastores it*/

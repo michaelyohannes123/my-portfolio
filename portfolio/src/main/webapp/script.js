@@ -11,60 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/*gets comments from servlet doGet and displays it*/
-function checkLogin(){
-  fetch('/login').then(response => response.text()).then((output) => {
-    let user;
-    let login_link = document.getElementById('login_link');
-    let status = JSON.parse(output);
-    if(status['login-status'] === 'out'){
-      login_link.innerHTML = 'Login';
-    }
-    if(status['login-status'] === 'in'){
-      localStorage.setItem('userEmail', status['userEmail']);
-      localStorage.setItem('highScore', status['highScore']);
-      document.getElementById('greet-user').innerHTML = 'Hello ' + status['userEmail'] + '!';
-      document.getElementById('greet-user').style.display = 'block';
-      login_link.innerHTML = 'Logout';
-      user = status['user'];
-    }
-    login_link.href = status['url'];
-    login_link.onclick = '#';
-    login_link.style.display = 'block';
-    if(status['first-time?'] === true){
-      document.getElementById('question').style.display = 'block';
-    }
-  });
-}
-/*enter user into database, storing their answer to the question*/
-function updateUserData(){
-  if(document.getElementById('d').checked === true){
-    let link = '/enter-user?userEmail=' + localStorage.getItem('userEmail') + '&answer=Deontological';
-    fetch(link).then(response => response.text()).then((data) => {
-      setUpClose();
-    });
-  }
-  else if(document.getElementById('u').checked === true){
-    let link = '/enter-user?userEmail=' + localStorage.getItem('userEmail') + '&answer=Utilitarian';
-    fetch(link).then(response => response.text()).then((data) => {
-      setUpClose();
-    });
-  }
-}
-/*inform user their question will be stored*/
-function setUpClose(){
-  document.getElementById('thanks').style.display = 'block';
-  document.getElementById('close').style.display = 'block';
-  document.getElementById('qp1').style.display = 'none';
-  document.getElementById('qp2').style.display = 'none';
-  document.getElementById('qp3').style.display = 'none';
-  document.getElementById('choices').style.display = 'none';
-  document.getElementById('answer_button').style.display = 'none';
-}
-//called after the thanks response given to user notifying them their response is being store
-function closeModal(){
-  document.getElementById('question').style.display = 'none';
-}
 /*president is randomly picked from array, enabling the questions and answers to be formed*/ 
 function getRandomPresident() {
   document.getElementById('game_button').style.display = 'none';
@@ -105,7 +51,7 @@ function makeChoices(presidents, president_answer, president_answer_pos){
   }
   return choices;
 }
-/*takes president's position in array to implement the ordinal-based 'who's the __th' president question format*/
+/*takes president's position in array to implement the ordinal-based "who's the __th" president question format*/
 function updateQuestion(president_answer_pos){
   const name_num = president_answer_pos + 1;
   let name = name_num + '';
@@ -162,7 +108,6 @@ function no(){
 /*once website opens, plane image moves across the top of the screen infinitely*/
 window.onload = 
 function plane_fly(){
-  checkLogin();
   let plane_image = document.getElementById('plane_id');
   let pos = 0;
   let move = setInterval(
@@ -170,6 +115,7 @@ function plane_fly(){
     if(pos === screen.width + (4 * plane_image.clientWidth)) {
       pos = 0;
       plane_image.style.left = pos + 'px'; 
+      //clearInterval(move); - makes it so that plane stops after 1 flight through screen
     }else{
       pos++;
       plane_image.style.left = pos + 'px'; 
