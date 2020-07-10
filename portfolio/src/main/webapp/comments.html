@@ -5,6 +5,7 @@
     <title>Michael's Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="comments_script.js"></script>
   </head>
   <!--get comments and display it-->
@@ -19,6 +20,14 @@
         <button class="tab_button" onclick="location.href = '/projects.html'">Projects</button>
         <button class="tab_button" onclick="location.href = '/coolarticles.html'">Interesting Articles</button>
         <button class="tab_button" onclick="location.href = '/countries.html'">Countries Game</button>
+      </div> 
+      <!-- display the question results in a chart -->
+      <div class="about_me space_out">
+        <div id="chart_div" style="display:none; margin-left: auto; margin-right: auto;"></div>
+      </div>
+      <div class="about_me">
+        <p id="chart_details" style="display:none;">Login (on 'About Me') to answer this question! Basically, the 
+        deontological approach is don't kill the 1, while the utilitarian approach is save the 5 but kill the 1.</p>
       </div>
       <div class="about_me">
         <h3>Leave a comment!<h3>
@@ -44,12 +53,6 @@
           <input class="tab_button" type="submit"/>
           </p>
         </form>
-      </div>
-      <div class="about_me">
-        <br>
-      </div>
-      <div class="about_me">
-        <br>
       </div>
       <div class="about_me">
         <div id="comments">

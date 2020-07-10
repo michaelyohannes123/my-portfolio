@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgYhYLcHtWYwIqk5FFxDxk8329M4MinK8"></script>
+    <script src="countries_list.js"></script>
     <script src="countries_game.js"></script>
   </head>
   <body onload="initMap()">
@@ -15,10 +16,10 @@
     <div>
       <!-- top links for other pages in the site -->
       <div class="top_tabs space_out">
+        <button class="tab_button" onclick="location.href = '/index.html'">About Me</button>
         <button class="tab_button" onclick="location.href = '/projects.html'">Projects</button>
         <button class="tab_button" onclick="location.href = '/coolarticles.html'">Interesting Articles</button>
-        <button class="tab_button" onclick="location.href = '/comments.html'">Comments Section</button>
-        <button class="tab_button" onclick="location.href = '/index.html'">About Me</button>
+        <button class="tab_button" onclick="location.href = '/comments.html'">Comments Section</button>  
       </div>
       <!-- map game -->
       <div class="about_me">
@@ -26,7 +27,8 @@
       </div>
       <div class="about_me">
         <p id="instruct_text">Guess as many countries as you can in 10 minutes. 
-          Markers will appear on the countries you guessed. Ready?</p>
+          Markers will appear on the countries you guessed. Note: if you have issues with the countries you 
+          type being registered by the map, try and refresh. Ready to start?</p>
         <p id="game_text" style="display:none;">Name a country (as many as you can!)</p>
       </div>
       <div class="about_me">
