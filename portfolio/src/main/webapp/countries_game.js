@@ -65,7 +65,6 @@ function endGame(){
   clearInterval(timer);
   let time_to_complete = total_time - timer_count;  
   document.getElementById('timer').style.display = 'none';
-  document.getElementById('start_button').style.display = 'block';
   document.getElementById('end_button').style.display = 'none';
   document.getElementById('instruct_text').style.display = 'block';
   let country_score = country_markers.length;
@@ -81,7 +80,7 @@ function endGame(){
   if(country_score === 0){
     instruct_text.innerHTML = 'I think you may have been on another tab. ';
   }
-  instruct_text.innerHTML = instruct_text.innerHTML + " Do you wish to play another round?";
+  instruct_text.innerHTML = instruct_text.innerHTML + " If you wish to play another round refresh your screen.";
   document.getElementById('game_text').style.display = 'none';
   document.getElementById('guess').style.display = 'none';
   document.getElementById('guess_score').style.display = 'none';
