@@ -1,3 +1,4 @@
+//====FIRST FUNCTION
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 /*show opinions on the trolley problem asked by users*/

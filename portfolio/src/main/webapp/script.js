@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//=======FIRST 4 FUNCTIONS
 /*gets comments from servlet doGet and displays it*/
 function checkLogin(){
   fetch('/login').then(response => response.text()).then((output) => {
