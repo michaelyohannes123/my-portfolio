@@ -28,7 +28,6 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
-//=====CREATED FILE
 /* handles getting total opinions on the question for the chart */
 @WebServlet("/get-userdata")
 public class UserDataServlet extends HttpServlet {

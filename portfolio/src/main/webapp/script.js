@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//=======FIRST 4 FUNCTIONS
 /*gets comments from servlet doGet and displays it*/
 function checkLogin(){
   fetch('/login').then(response => response.text()).then((output) => {
@@ -122,7 +121,7 @@ function updateQuestion(president_answer_pos){
   else{
     name += 'th';
   }
-  let question = document.getElementById('question');
+  let question = document.getElementById('bored_question');
   question.style.display = 'block';
   question.innerText = 'Who was the ' + name + ' president of the United States?';
 }
