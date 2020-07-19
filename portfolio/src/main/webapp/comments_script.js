@@ -4,7 +4,6 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
   fetch('/get-userdata').then(response => response.text()).then((ret) => {
     let opinions = JSON.parse(ret);
-    console.log(opinions);
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Approach');
     data.addColumn('number', 'Count');

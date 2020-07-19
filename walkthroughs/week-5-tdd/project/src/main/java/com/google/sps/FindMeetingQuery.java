@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.Comparator;
 
 public final class FindMeetingQuery {
+  //find a list of open time slots for requested meeting attendees
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     List<TimeRange> event_times = new ArrayList<TimeRange>();
     List<TimeRange> times_mandatory = new ArrayList<TimeRange>();    
@@ -35,21 +36,21 @@ public final class FindMeetingQuery {
     for(Event event : events){
       TimeRange event_time = event.getWhen();
       Collection<String> event_people = event.getAttendees();
-      boolean people_in_both = false;
+      boolean people_in_request_and_event = false;
       for(String attendee : attendees){
         if(event_people.contains(attendee) == true){
           times_mandatory.add(event_time);
-          people_in_both = true;
+          people_in_request_and_event = true;
           break;
         }
       }
       for(String attendee : optional_attendees){
         if(event_people.contains(attendee) == true){
-          people_in_both = true;
+          people_in_request_and_event = true;
           break;
         }
       }
-      if(people_in_both == true){
+      if(people_in_request_and_event == true){
         event_times.add(event_time);
       }
       e_count++;
@@ -67,18 +68,18 @@ public final class FindMeetingQuery {
     }
     return results;
   }
-  //find time the time slot spaces between the ordered list of events
+  //find the time slot spaces between the ordered list of events occuring 
   public List<TimeRange> findSlots(List<TimeRange> results, List<TimeRange> time_ranges, long duration){
     for(int i = 0; i < time_ranges.size(); i++){
-      TimeRange tr = time_ranges.get(i);
+      TimeRange time_range = time_ranges.get(i);
       if(i == 0){
-        int pre_events_time = tr.start() - TimeRange.START_OF_DAY;
+        int pre_events_time = time_range.start() - TimeRange.START_OF_DAY;
         if(pre_events_time >= (int) duration){
           results.add(TimeRange.fromStartDuration(TimeRange.START_OF_DAY, pre_events_time));
         }
       }else{
         int pre_event_end = time_ranges.get(i - 1).end();
-        int event_start = tr.start();
+        int event_start = time_range.start();
         if(event_start - pre_event_end >= (int) duration){
           results.add(TimeRange.fromStartEnd(pre_event_end, event_start, false));
         }
@@ -91,7 +92,7 @@ public final class FindMeetingQuery {
     }
     return results;
   }
-  //ignore the nested loops prior to assessing time slots
+  //ignore the nested loops prior to assessing free time slots
   public List<TimeRange> removeNested(List<TimeRange> event_times){
     List<TimeRange> time_ranges = new ArrayList<TimeRange>();
     int n_count = 0;
